@@ -2,7 +2,8 @@ package bookings;
 
 public class SeatReservationManager {
 
-    //@ invariant seatReservations != null && \nonnullelements(seatReservations)
+    //@ invariant seatReservations != null;
+    //@ invariant \nonnullelements(seatReservations);
     private final Customer[][] seatReservations;
     
     public SeatReservationManager() {
@@ -10,13 +11,13 @@ public class SeatReservationManager {
                                        [numberToIndex(Seat.MAX_NUMBER) + 1];
     }
 
-    //@ requires s != null
+    //@ requires s != null;
     public boolean isReserved(Seat s) {
         return seatReservations[rowToIndex(s.getRow())]
                                [numberToIndex(s.getNumber())] != null;
     }
 
-    //@ requires s != null
+    //@ requires s != null;
     public void reserve(Seat s, Customer c) 
             throws ReservationException {
         if(isReserved(s)) {
@@ -26,7 +27,7 @@ public class SeatReservationManager {
                         [numberToIndex(s.getNumber())] = c;
     }
     
-    //@ requires s != null
+    //@ requires s != null;
     public void unreserve(Seat s)
             throws ReservationException {
         if(!isReserved(s)) {
@@ -85,19 +86,19 @@ public class SeatReservationManager {
         return result;
     }
 
-    private static int rowToIndex(char row) {
+    private /*@ helper @*/ static int rowToIndex(char row) {
         return row - Seat.MIN_ROW;
     }
 
-    private static int numberToIndex(int number) {
+    private /*@ helper @*/ static int numberToIndex(int number) {
         return number - Seat.MIN_NUMBER;
     }
     
-    private static char indexToRow(int index) {
+    private /*@ helper @*/ static char indexToRow(int index) {
         return (char)(Seat.MIN_ROW + index);
     }
 
-    private static int indexToNumber(int index) {
+    private /*@ helper @*/ static int indexToNumber(int index) {
         return index + Seat.MIN_NUMBER;
     }
     
