@@ -2,8 +2,14 @@ package bookings;
 
 public class SeatReservationManager {
 
-    //@ invariant seatReservations != null;
-    //@ invariant \nonnullelements(seatReservations);
+    /*@
+        invariant seatReservations != null;
+        invariant \nonnullelements(seatReservations);
+        invariant seatReservations.length > Seat.MAX_ROW - Seat.MIN_ROW;
+        invariant (\forall int x;
+            0 <= x && x < seatReservations.length ==>
+            seatReservations[x].length > Seat.MAX_NUMBER - Seat.MIN_NUMBER);
+    @*/
     private final Customer[][] seatReservations;
     
     public SeatReservationManager() {
