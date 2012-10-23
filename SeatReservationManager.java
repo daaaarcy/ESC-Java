@@ -8,7 +8,8 @@ public class SeatReservationManager {
         invariant seatReservations.length > Seat.MAX_ROW - Seat.MIN_ROW;
         invariant (\forall int x;
             0 <= x && x < seatReservations.length ==>
-            seatReservations[x].length > Seat.MAX_NUMBER - Seat.MIN_NUMBER);
+            seatReservations[x].length > Seat.MAX_NUMBER - Seat.MIN_NUMBER &&
+            \elemtype(\typeof(seatReservations[x])) == \type(Customer));
     @*/
     private final Customer[][] seatReservations;
     
